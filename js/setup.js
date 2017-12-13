@@ -8,6 +8,15 @@ $().ready(function () {
         if (localStorage.showLineNumbers === undefined) localStorage.showLineNumbers = true;
         if (localStorage.autoClose === undefined) localStorage.autoClose = true;
         if (localStorage.theme === undefined) localStorage.theme = "midnight";
+        if (localStorage.fileValue === undefined) localStorage.fileValue = "<!doctype html>\n" +
+            "<html>\n" +
+            "<head>\n" +
+            "    <title>Test</title>\n" +
+            "</head>\n" +
+            "<body>\n" +
+            "    <h1>Test</h1>\n" +
+            "</body>\n" +
+            "</html>";
 
         // Change the check boxes to reflect current settings
         $("#lineNumbers").prop("checked", localStorage.showLineNumbers === "true");
@@ -35,6 +44,7 @@ $().ready(function () {
                 "Ctrl-Slash": "toggleComment"
             }
         });
+        cm.setValue(localStorage.fileValue);
     } else {
         // No Storage means no settings for now, unfortunately
         cm = CodeMirror.fromTextArea(code, {

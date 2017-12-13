@@ -23,4 +23,9 @@ $().ready(function () {
             alert("No web storage support.")
         }
     });
+    $("#save").on("click", function () {
+        if (typeof(Storage) !== "undefined") {
+            localStorage.fileValue = cm.getValue("\n");
+        };
+    });
 });
