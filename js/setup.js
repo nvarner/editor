@@ -5,18 +5,20 @@ $().ready(function () {
 
     if (typeof(Storage) !== undefined) {
         // Set settings of its the first run
-        if (localStorage.showLineNumbers === undefined) localStorage.showLineNumbers = false;
+        if (localStorage.showLineNumbers === undefined) localStorage.showLineNumbers = true;
         if (localStorage.autoClose === undefined) localStorage.autoClose = true;
+        if (localStorage.theme === undefined) localStorage.theme = "midnight";
 
         // Change the check boxes to reflect current settings
-        $("#lineNumbers")[0].checked = localStorage.showLineNumbers === "true";
-        $("#autoClose")[0].checked = localStorage.autoClose === "true";
+        $("#lineNumbers").prop("checked", localStorage.showLineNumbers === "true");
+        $("#autoClose").prop("checked", localStorage.autoClose === "true");
+        $("#theme").val(localStorage.theme);
 
         cm = CodeMirror.fromTextArea(code, {
             mode: "htmlmixed",
             indentUnit: 4,
             lineNumbers: localStorage.showLineNumbers === "true", // Convert to boolean
-            theme: "midnight",
+            theme: localStorage.theme,
             showHint: true,
             autoCloseTags: localStorage.autoClose === "true",
             autoCloseBrackets: localStorage.autoClose === "true",
