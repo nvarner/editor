@@ -119,6 +119,9 @@
                         </div>
                     </li>
                 </ul>
+                <form class="form-inline">
+                    <button class="btn btn-success" id="update">Update</button>
+                </form>
             </div>
         </nav>
     </div>
@@ -137,7 +140,7 @@
 </textarea>
         </div>
         <div class="col w-50 body-col">
-            <iframe id="result" class="w-100 m-0 border-0"></iframe>
+            <iframe sandbox="allow-forms allow-scripts allow-same-origin allow-modals allow-popups" id="result" class="w-100 m-0 border-0"></iframe>
         </div>
     </div>
 </div>
@@ -163,6 +166,12 @@
                     <label for="autoClose" class="form-check-label row">
                         <input type="checkbox" class="form-check-input" id="autoClose" checked="checked" />
                         Autoclose tags and brackets
+                    </label>
+                </div>
+                <div class="form-check container">
+                    <label for="autoUpdate" class="form-check-label row">
+                        <input type="checkbox" class="form-check-input" id="autoUpdate" />
+                        Autoupdate result
                     </label>
                 </div>
                 <div class="form-group">

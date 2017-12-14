@@ -16,6 +16,9 @@ $().ready(function () {
             cm.setOption("autoCloseTags", autoClose);
             cm.setOption("autoCloseBrackets", autoClose);
 
+            var autoUpdate = $("#autoUpdate").is(":checked");
+            localStorage.autoUpdate = autoUpdate;
+
             var theme = $("#theme").val()
             localStorage.theme = theme;
             cm.setOption("theme", theme);

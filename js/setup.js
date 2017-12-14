@@ -8,6 +8,7 @@ $().ready(function () {
         if (localStorage.showLineNumbers === undefined) localStorage.showLineNumbers = true;
         if (localStorage.autoClose === undefined) localStorage.autoClose = true;
         if (localStorage.theme === undefined) localStorage.theme = "midnight";
+        if (localStorage.autoUpdate === undefined) localStorage.autoUpdate = false;
         if (localStorage.fileValue === undefined) localStorage.fileValue = "<!doctype html>\n" +
             "<html>\n" +
             "<head>\n" +
@@ -21,6 +22,7 @@ $().ready(function () {
         // Change the check boxes to reflect current settings
         $("#lineNumbers").prop("checked", localStorage.showLineNumbers === "true");
         $("#autoClose").prop("checked", localStorage.autoClose === "true");
+        $("#autoClose").prop("checked", localStorage.autoUpdate === "true");
         $("#theme").val(localStorage.theme);
 
         cm = CodeMirror.fromTextArea(code, {
@@ -76,7 +78,9 @@ $().ready(function () {
     }, 500);
 
     cm.on("change", function (cm) {
-        window.frames["result"].contentDocument.documentElement.innerHTML = cm.getValue();
+        if (typeof(Storage) !== "undefined" && localStorage.autoUpdate === "true") {
+            $("#result").contents().find("body").html(cm.getValue());
+        }
     });
 
     // From https://stackoverflow.com/questions/13744176/codemirror-autocomplete-after-any-keyup
@@ -153,5 +157,8 @@ $().ready(function () {
 
             cm.toggleComment(range.form, range.to);
         }
+    });
+    $("#update").on("click", function () {
+        $("#result").contents().find("body").html(cm.getValue());
     });
 });
