@@ -41,6 +41,8 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
 
+    <script src="js/jquery.resize.js"></script>
+
     <script src="js/Blob.js"></script>
     <script src="js/FileSaver.min.js"></script>
 
@@ -110,8 +112,13 @@
                             <a class="dropdown-item" href="#">New</a>
                             <a class="dropdown-item" href="#">Open</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" id="save">Save</a>
-                            <a class="dropdown-item" href="#" id="saveToDisk">Save to Computer</a>
+                            <a class="dropdown-item" href="#" id="save">
+                                Save <kbd class="float-right"><kbd>Ctrl</kbd> + <kbd>S</kbd></kbd>
+                            </a>
+                            <a class="dropdown-item" href="#" id="saveToDisk">
+                                Save to Computer
+                                <kbd class="float-right"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd></kbd>
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" id="settings" data-toggle="modal" data-target="#settingsModal">Settings</a>
                         </div>

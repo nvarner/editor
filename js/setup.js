@@ -1,13 +1,21 @@
 var cm;
+var layout;
 
 $().ready(function () {
+    var goldenLayoutContainer = $("#content");
+    goldenLayoutContainer.resize(function () {
+        layout.updateSize();
+    });
+
     var goldenLayoutConfig = {
         content: [{
             type: 'row',
             content: [{
                 type: 'component',
-                componentName: "Editor",
-                componentState: {label: 'A'}
+                componentName: "editor",
+                componentState: {
+                    filename: "index.html"
+                }
             }, {
                 type: 'component',
                 componentName: 'Result',
@@ -15,14 +23,21 @@ $().ready(function () {
             }]
         }]
     };
-    var goldenLayout = new GoldenLayout(goldenLayoutConfig, $("#content"));
-    goldenLayout.registerComponent("Editor", function (container, componentState) {
+    layout = new GoldenLayout(goldenLayoutConfig, goldenLayoutContainer);
+
+    layout.registerComponent("editor", function (container, componentState) {
         container.getElement().html("<textarea id='code'>");
+
+        var tabTitle = componentState.filename;
+        container.on("tab", function(tab){
+            console.log(tab.element);
+            tab.element.html(tabTitle);
+        });
     });
-    goldenLayout.registerComponent("Result", function (container, componentState) {
+    layout.registerComponent("Result", function (container, componentState) {
         container.getElement().html("<iframe id='result' class='w-100 m-0 border-0'></iframe>");
     });
-    goldenLayout.init();
+    layout.init();
 
     var code = $("#code")[0];
 
