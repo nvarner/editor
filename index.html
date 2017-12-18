@@ -41,6 +41,9 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.js"></script>
 
+    <script src="js/Blob.js"></script>
+    <script src="js/FileSaver.min.js"></script>
+
     <script src="codemirror/lib/codemirror.js"></script>
 
     <script src="codemirror/mode/javascript/javascript.js"></script>
@@ -68,6 +71,11 @@
     <script src="codemirror/addon/scroll/simplescrollbars.js"></script>
 
     <script src="codemirror/addon/comment/comment.js"></script>
+
+    <!-- Golden Layout -->
+    <script src="https://golden-layout.com/files/latest/js/goldenlayout.min.js"></script>
+    <link rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-base.css" />
+    <link rel="stylesheet" href="https://golden-layout.com/files/latest/css/goldenlayout-dark-theme.css" />
 
     <script src="js/setup.js"></script>
     <script src="js/menu/settings.js"></script>
@@ -104,7 +112,9 @@
                         <div class="dropdown-menu" aria-labelledby="fileDropdown">
                             <a class="dropdown-item" href="#">New</a>
                             <a class="dropdown-item" href="#">Open</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" id="save">Save</a>
+                            <a class="dropdown-item" href="#" id="saveToDisk">Save to Computer</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" id="settings" data-toggle="modal" data-target="#settingsModal">Settings</a>
                         </div>
@@ -125,24 +135,7 @@
             </div>
         </nav>
     </div>
-    <div class="row h-90 w-100">
-        <div class="col mh-100 w-50 body-col">
-            <textarea id="code">
-<!doctype html>
-<html>
-<head>
-    <title>Test</title>
-</head>
-<body>
-    <h1>Test</h1>
-</body>
-</html>
-</textarea>
-        </div>
-        <div class="col w-50 body-col">
-            <iframe sandbox="allow-forms allow-scripts allow-same-origin allow-modals allow-popups" id="result" class="w-100 m-0 border-0"></iframe>
-        </div>
-    </div>
+    <div class="row-12 h-90" id="content"></div>
 </div>
 
 <!-- Modals -->

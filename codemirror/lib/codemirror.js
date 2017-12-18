@@ -3337,7 +3337,7 @@ function maybeUpdateLineNumberWidth(cm) {
                                                "CodeMirror-linenumber CodeMirror-gutter-elt"))
     var innerW = test.firstChild.offsetWidth, padding = test.offsetWidth - innerW
     display.lineGutter.style.width = ""
-    display.lineNumInnerWidth = Math.max(innerW, display.lineGutter.offsetWidth - padding) + 14 // THIS NUMBER FIXED A BUG, DON'T GET RID OF IT!!1!
+    display.lineNumInnerWidth = Math.max(innerW, display.lineGutter.offsetWidth - padding)
     display.lineNumWidth = display.lineNumInnerWidth + padding
     display.lineNumChars = display.lineNumInnerWidth ? last.length : -1
     display.lineGutter.style.width = display.lineNumWidth + "px"

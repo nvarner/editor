@@ -1,6 +1,29 @@
 var cm;
 
 $().ready(function () {
+    var goldenLayoutConfig = {
+        content: [{
+            type: 'row',
+            content: [{
+                type: 'component',
+                componentName: "Editor",
+                componentState: {label: 'A'}
+            }, {
+                type: 'component',
+                componentName: 'Result',
+                componentState: {label: 'B'}
+            }]
+        }]
+    };
+    var goldenLayout = new GoldenLayout(goldenLayoutConfig, $("#content"));
+    goldenLayout.registerComponent("Editor", function (container, componentState) {
+        container.getElement().html("<textarea id='code'>");
+    });
+    goldenLayout.registerComponent("Result", function (container, componentState) {
+        container.getElement().html("<iframe id='result' class='w-100 m-0 border-0'></iframe>");
+    });
+    goldenLayout.init();
+
     var code = $("#code")[0];
 
     if (typeof(Storage) !== undefined) {
@@ -22,7 +45,7 @@ $().ready(function () {
         // Change the check boxes to reflect current settings
         $("#lineNumbers").prop("checked", localStorage.showLineNumbers === "true");
         $("#autoClose").prop("checked", localStorage.autoClose === "true");
-        $("#autoClose").prop("checked", localStorage.autoUpdate === "true");
+        $("#autoUpdate").prop("checked", localStorage.autoUpdate === "true");
         $("#theme").val(localStorage.theme);
 
         cm = CodeMirror.fromTextArea(code, {
