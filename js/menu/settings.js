@@ -19,7 +19,7 @@ $().ready(function () {
             var autoUpdate = $("#autoUpdate").is(":checked");
             localStorage.autoUpdate = autoUpdate;
 
-            var theme = $("#theme").val()
+            var theme = $("#theme").val();
             localStorage.theme = theme;
             cm.setOption("theme", theme);
         } else {
@@ -27,30 +27,32 @@ $().ready(function () {
         }
     });
     $("#save").on("click", function () {
-        if (typeof(Storage) !== "undefined") {
-            localStorage.fileValue = cm.getValue("\n");
-        }
+        browserSave(cm.getValue("\n"));
     });
     $(window).on("keydown", function(e) {
         if (e.keyCode === 83 && e.ctrlKey && !e.shiftKey) {
-            if (typeof(Storage) !== "undefined") {
-                localStorage.fileValue = cm.getValue("\n");
-                e.preventDefault();
-            }
+            browserSave(cm.getValue("\n"));
+            e.preventDefault();
             return false;
         } else if (e.keyCode === 68 && e.ctrlKey && e.shiftKey) {
-            var blob = new Blob([cm.getValue("\n")], {
-                "type": "text/html;charset=utf-8"
-            });
-            saveAs(blob, "index.html");
+            diskSave(cm.getValue("\n"), "index.html", "text/html;charset=utf-8");
         }
 
         return true;
     });
     $("#saveToDisk").on("click", function () {
-        var blob = new Blob([cm.getValue("\n")], {
-            "type": "text/html;charset=utf-8"
-        });
-        saveAs(blob, "index.html");
+        diskSave(cm.getValue("\n"), "index.html", "text/html;charset=utf-8");
     });
 });
+
+function browserSave (value) {
+    if (typeof(Storage) !== "undefined") {
+        localStorage.fileValue = value;
+    }
+}
+function diskSave (value, filename, filetype) {
+    var blob = new Blob([value], {
+        "type": filetype
+    });
+    saveAs(blob, filename);
+}
