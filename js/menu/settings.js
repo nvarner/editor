@@ -29,19 +29,20 @@ $().ready(function () {
     $("#save").on("click", function () {
         browserSave(cm.getValue("\n"));
     });
-    $(window).on("keydown", function(e) {
-        if (e.keyCode === 83 && e.ctrlKey && !e.shiftKey) {
-            browserSave(cm.getValue("\n"));
-            e.preventDefault();
-            return false;
-        } else if (e.keyCode === 68 && e.ctrlKey && e.shiftKey) {
-            diskSave(cm.getValue("\n"), "index.html", "text/html;charset=utf-8");
-        }
-
-        return true;
-    });
     $("#saveToDisk").on("click", function () {
         diskSave(cm.getValue("\n"), "index.html", "text/html;charset=utf-8");
+    });
+
+    $(window).on("keydown", function(e) {
+        if (e.keyCode === 83 && e.ctrlKey && !e.shiftKey) {
+            e.preventDefault();
+            browserSave(cm.getValue("\n"));
+        }
+    });
+    $(window).on("keydown", function (e) {
+        if (e.keyCode === 68 && e.ctrlKey && e.shiftKey) {
+            diskSave(cm.getValue("\n"), "index.html", "text/html;charset=utf-8");
+        }
     });
 });
 
